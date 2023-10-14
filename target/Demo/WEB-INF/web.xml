@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"
+         metadata-complete="true">
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:mysql://localhost:3306/mysql</param-value>
+  </context-param>
+
+  <!--    注册Servlet-->
+  <servlet>
+    <servlet-name>demo</servlet-name>
+    <servlet-class>com.lifeng.servlet.DemoServlet</servlet-class>
+  </servlet>
+
+  <!--  请求路径  -->
+  <servlet-mapping>
+    <servlet-name>demo</servlet-name>
+    <url-pattern>/demo</url-pattern>
+  </servlet-mapping>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error/404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error/500.jsp</location>
+  </error-page>
+  
+  <filter>
+    <filter-name>filter</filter-name>
+    <filter-class>com.lifeng.filter.DemoFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>filter</filter-name>
+    <!-- 指定对应地址经过的过滤器，如/servlet/*指servlet下所有请求，/*是全部 -->
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <listener>
+    <listener-class>com.lifeng.listener.DemoListener</listener-class>
+  </listener>
+  
+</web-app>
